@@ -1,0 +1,26 @@
+.card {
+  width: 300px;
+  height: 150px;
+  margin: 5px;
+  display: block;
+  float: left;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 0px 5px 0px #323232;
+  -moz-box-shadow: 1px 0px 5px 0px #323232;
+  box-shadow: 1px 0px 5px 0px #323232; }
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+  float: left;
+  display: block;
+  border: 1px solid black; }
+
+.name {
+  margin: 5px; }
+
+/*# sourceMappingURL=main.css.map */

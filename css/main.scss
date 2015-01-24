@@ -1,0 +1,36 @@
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+@mixin box-shadow($stuff) {
+	
+	-webkit-box-shadow: $stuff;
+	-moz-box-shadow:    $stuff;
+	box-shadow:         $stuff;
+}
+
+.card {
+	width:300px;
+	height:150px;
+	margin:5px;
+	display:block;
+	float:left;
+	@include border-radius(5px);
+	@include box-shadow(1px 0px 5px 0px rgba(50, 50, 50, 1));
+
+}
+
+.thumbnail {
+	width:80px;
+	height:80px;
+	margin:5px;
+	float:left;
+	display:block;
+	border:1px solid black;
+}
+
+.name {
+	margin:5px;
+}

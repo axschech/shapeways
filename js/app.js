@@ -1,6 +1,7 @@
 
 require.config({
 	// waitSeconds: 0,
+	baseUrl:'js',
 	paths: {
 	    jquery: 'jquery.min',
 	    underscore: 'underscore.min',
@@ -56,7 +57,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 					},
 
 					render: function() {
-						Users.fetch();
+						Users.sync();
 						if(Users.length) {
 							this.addAll();
 						}
@@ -102,8 +103,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 
 					deleteUser: function() {
 						// console.log('deleting');
-						console.log(this.model);
-						Users.remove(this.model);
+						this.model.destroy();
 					}
 			});
 			var App = new AppView();

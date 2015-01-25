@@ -55,6 +55,7 @@ h1, h3 {
 	cursor:pointer;
 }
 
+// since all three of these fields share a lot of name's properties, I just extended name
 .email, .follow, .twitter {
 	@extend .name;
 	font-size: 14px;
@@ -66,6 +67,7 @@ h1, h3 {
 	width:12px;
 }
 
+//this was to keep the fields from overflowing
 .editables {
 	display:block;
 	float:left;
@@ -82,6 +84,9 @@ input[type=text] {
 
 input[type=file] {
 	cursor:pointer;
+	opacity: 0;
+	height:80px;
+	width:80px
 }
 
 #game {

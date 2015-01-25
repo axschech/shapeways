@@ -68,7 +68,10 @@ input[type=text] {
   margin: 5px; }
 
 input[type=file] {
-  cursor: pointer; }
+  cursor: pointer;
+  opacity: 0;
+  height: 80px;
+  width: 80px; }
 
 #game {
   width: 100px; }

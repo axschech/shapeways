@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
@@ -10,7 +12,9 @@
 	-moz-box-shadow:    $stuff;
 	box-shadow:         $stuff;
 }
-
+.delete_user {
+	float:right;
+}
 .card {
 	width:300px;
 	height:150px;
@@ -32,5 +36,9 @@
 }
 
 .name {
-	margin:5px;
+	font-family: 'PT Sans', sans-serif;
+	font-weight:bold;
+	color: #58D3F7;
+	font-size: 20px;
+	margin: 5px;
 }

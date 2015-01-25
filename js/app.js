@@ -25,7 +25,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 
 			var User = Backbone.Model.extend({
 					defaults: function() {
-						console.log('whoa');
+
 						return {
 							order: Users.nextOrder(),
 							name: "",
@@ -56,14 +56,13 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 
 					initialize: function() {
 
-						this.users = this.$('#users');
 						this.listenTo(Users, 'add', this.addOne);
 						this.render();
 
 					},
 
 					render: function() {
-						console.log('raynder')
+						// console.log('raynder')
 						Users.fetch();
 						if(Users.length) {
 							// this.addAll();
@@ -71,9 +70,9 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 					},
 
 					addOne: function(user) {
-						console.log('adding one');
+						// console.log('adding one');
 						var view = new UserView({model: user});
-						this.users.append(view.render().el);
+						this.$('#users').append(view.render().el);
 					},
 
 					addAll: function() {
@@ -87,35 +86,62 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 			});
 
 			var UserView = Backbone.View.extend({
-
-					tagName: 'div',
-					className: 'users',
+					className:"users",
 
 					template: _.template($("#card").html()),
 
 					events: {
+						'keypress .edit_name': 'changeName',
+						'dblclick .name': 'editName',
 						'click .delete_user': 'deleteUser'
 					},
 
 					initialize: function() {
-
+						this.listenTo(this.model, 'change', this.render);
 						this.listenTo(this.model, 'destroy', this.remove);
 					},
 
 					render: function() {
-						 if(this.model.name=="") {
-						 	this.$('.input').show();
+						this.$el.html(this.template(this.model.toJSON()));
+						
+						 if(this.model.get('name')=="") {
+						 	this.$('.edit_name').show();
 						 	this.$('.name').hide();
 						 }
 						 else {
-						 	this.$('.input').show();
-						 	this.$('.name').hide();
+						 	this.$('.edit_name').hide();
+						 	this.$('.name').show();
 						 }
-						 this.$el.html(this.template(this.model.toJSON()));
+						 
+						 if(this.model.get('email')=="") {
+						 	this.$('.edit_email').show();
+						 	this.$('.email').hide();
+						 }
+						 else {
+						 	this.$('.edit_email').hide();
+						 	this.$('.email').show();
+						 }
+
 						 return this;
 						//var view = new UserView({model: User});
 					},
+					editName: function() {
+						this.$('.edit_name').show();
+						this.$('.name').hide();
+					},
+					changeName: function(e) {
 
+						if (e.keyCode != 13) return;
+      					if (!this.$('.edit_name').val()) return;
+
+						var name = this.$('.edit_name').val();
+						this.model.set('name', name);
+						this.model.save();
+
+						this.$('.edit_name').hide();
+						this.$('.name').show();
+						Users.fetch();
+					},
 					deleteUser: function() {
 						// console.log('deleting');
 						this.model.destroy();

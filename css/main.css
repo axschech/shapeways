@@ -1,3 +1,7 @@
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+.delete_user {
+  float: right; }
+
 .card {
   width: 300px;
   height: 150px;
@@ -21,6 +25,10 @@
   border: 1px solid black; }
 
 .name {
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  color: #58D3F7;
+  font-size: 20px;
   margin: 5px; }
 
 /*# sourceMappingURL=main.css.map */

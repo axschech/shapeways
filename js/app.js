@@ -97,6 +97,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						'dblclick .email': 'editEmail',
 						'keypress .edit_twitter': 'changeTwitter',
 						'dblclick .twitter': 'editTwitter',
+						'click .follow': 'goTwitter',
 						'click .delete_user': 'deleteUser',
 						'change .files': 'changePicture'
 						// 'mouseenter .thumbnail': 'onPicture',
@@ -184,7 +185,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						console.log(e);
 						if (e.keyCode != 13) return;
       					if (!this.$('.edit_twitter').val()) return;
-      					console.log('hetting here');
+      					
 						var twitter = this.$('.edit_twitter').val();
 						
 						this.model.set('twitter', twitter);
@@ -193,6 +194,15 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						this.$('.edit_twitter').hide();
 						this.$('.twitter').show();
 						Users.fetch();
+					},
+					goTwitter: function() {
+						if(this.model.get('twitter')=="") return;
+
+						var url = "https://twitter.com/"+this.model.get('twitter');
+						window.open(
+							url,
+							'_blank'
+						);
 					},
 					changePicture: function(evt) {
 						var self = this;

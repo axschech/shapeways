@@ -23,7 +23,7 @@
 <script type="text/template" id="card">
 <div class="card">
 	
-	<img class="thumbnail" src="<%- image %>">
+	<div class="thumbnail" style='background-size:cover;<%- "background-image: url("+image+")" %>' ><input type="file" class="files" name="files[]" style="opacity: 0;height:80px; width:80px" /></div>
 	
 	<span class="delete_user"><img class="glyph" src="img/remove.png"></span>
 	<br />
@@ -35,7 +35,6 @@
 	</div>
 	<br />
 	
-
 </div>
 
 </script>

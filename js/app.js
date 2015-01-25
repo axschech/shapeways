@@ -95,9 +95,12 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						'dblclick .name': 'editName',
 						'keypress .edit_email': 'changeEmail',
 						'dblclick .email': 'editEmail',
-						'keypress .edit_twtter': 'changeTwitter',
+						'keypress .edit_twitter': 'changeTwitter',
 						'dblclick .twitter': 'editTwitter',
-						'click .delete_user': 'deleteUser'
+						'click .delete_user': 'deleteUser',
+						'change .files': 'changePicture'
+						// 'mouseenter .thumbnail': 'onPicture',
+						// 'mouseleave .thumbnail': 'offPicture'
 
 					},
 
@@ -178,9 +181,10 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						this.$('.twitter').hide();
 					},
 					changeTwitter: function(e) {
+						console.log(e);
 						if (e.keyCode != 13) return;
       					if (!this.$('.edit_twitter').val()) return;
-
+      					console.log('hetting here');
 						var twitter = this.$('.edit_twitter').val();
 						
 						this.model.set('twitter', twitter);
@@ -189,6 +193,24 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						this.$('.edit_twitter').hide();
 						this.$('.twitter').show();
 						Users.fetch();
+					},
+					changePicture: function(evt) {
+						var self = this;
+						console.log(evt);
+						var files = evt.target.files;
+						var f = files[0];
+						var reader = new FileReader();
+						reader.onload = (function(theFile) {
+							return function(e) {
+							  // Render thumbnail.
+
+								self.model.set('image', e.target.result);
+								self.model.save();
+							};
+						})(f);
+
+					      // Read in the image file as a data URL.
+					      reader.readAsDataURL(f);
 					},
 					deleteUser: function() {
 						// console.log('deleting');

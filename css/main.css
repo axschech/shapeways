@@ -1,7 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Sans);
 .delete_user {
   display: block;
-  float: right; }
+  float: right;
+  margin: 5px; }
 
 .card {
   width: 300px;

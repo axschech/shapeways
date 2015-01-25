@@ -25,10 +25,14 @@
 	<div class="thumbnail">
 
 	</div>
-	<span class="delete_user">X</span>
+	<span class="delete_user"><img class="glyph" src="img/remove.png"></span>
 	<br />
-	<div class="name"><%- name %> </div><input class="edit_name" type="text" value="<%- name %>" /> 
-	<div class="email"><&- email %> </div><input class="edit_email" type="text" value="<%- email %>">
+	<div class="editables">
+		<div class="name"><%- name %> </div><input class="edit_name" type="text" value="<%- name %>" />
+		<div class="email"><img class="glyph" src="img/email.png"><%- email %> </div><input class="edit_email" type="text" value="<%- email %>" />
+		<div class="follow"><img class="glyph" src="img/follow.png">Follow</div>
+		<div class="twitter"><img class="glyph" src="img/twitter.png"><%- twitter %></div><input class="edit_twitter" type="text" value="<%- twitter %>" />
+	</div>
 	<br />
 	
 

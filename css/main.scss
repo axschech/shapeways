@@ -13,6 +13,7 @@
 	box-shadow:         $stuff;
 }
 .delete_user {
+	display:block;
 	float:right;
 }
 .card {
@@ -29,16 +30,42 @@
 .thumbnail {
 	width:80px;
 	height:80px;
-	margin:5px;
+	margin:15px;
 	float:left;
 	display:block;
 	border:1px solid black;
 }
 
 .name {
+	display:block;
 	font-family: 'PT Sans', sans-serif;
 	font-weight:bold;
 	color: #58D3F7;
 	font-size: 20px;
 	margin: 5px;
+}
+
+.email, .follow, .twitter {
+	@extend .name;
+	font-size: 16px;
+	color: #0B0B3B;
+}
+
+.glyph {
+	margin-right:5px;
+	width:12px;
+}
+
+.editables {
+	display:block;
+	float:left;
+	width:150px;
+}
+
+input[type=text] {
+	@include border-radius(4px);
+	display:block;
+	border: 1px solid #ccc;
+	height:25px;
+	margin:5px;
 }

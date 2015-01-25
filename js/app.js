@@ -28,9 +28,9 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 
 						return {
 							order: Users.nextOrder(),
-							name: "",
-							email: "",
-							twitter: "",
+							name: "Username",
+							email: "Contact",
+							twitter: "@twitter-handle",
 							picture: ""
 						}
 					}
@@ -76,7 +76,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 					},
 
 					addAll: function() {
-				      Users.each(this.addOne, this);
+				      	Users.each(this.addOne, this);
 				    },
 
 					createUser: function() {
@@ -93,7 +93,12 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 					events: {
 						'keypress .edit_name': 'changeName',
 						'dblclick .name': 'editName',
+						'keypress .edit_email': 'changeEmail',
+						'dblclick .email': 'editEmail',
+						'keypress .edit_twtter': 'changeTwitter',
+						'dblclick .twitter': 'editTwitter',
 						'click .delete_user': 'deleteUser'
+
 					},
 
 					initialize: function() {
@@ -122,6 +127,15 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						 	this.$('.email').show();
 						 }
 
+						 if(this.model.get('twitter')=="") {
+						 	this.$('.edit_twitter').show();
+						 	this.$('.twitter').hide();
+						 }
+						 else {
+						 	this.$('.edit_twitter').hide();
+						 	this.$('.twitter').show();
+						 }
+
 						 return this;
 						//var view = new UserView({model: User});
 					},
@@ -140,6 +154,23 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 
 						this.$('.edit_name').hide();
 						this.$('.name').show();
+						Users.fetch();
+					},
+					editEmail: function() {
+						this.$('.edit_email').show();
+						this.$('.email').hide();
+					},
+					changeEmail: function(e) {
+						if (e.keyCode != 13) return;
+      					if (!this.$('.edit_email').val()) return;
+
+						var email = this.$('.edit_email').val();
+						
+						this.model.set('email', email);
+						this.model.save();
+
+						this.$('.edit_email').hide();
+						this.$('.email').show();
 						Users.fetch();
 					},
 					deleteUser: function() {

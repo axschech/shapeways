@@ -12,6 +12,12 @@
 	-moz-box-shadow:    $stuff;
 	box-shadow:         $stuff;
 }
+
+h1, h3 {
+	font-family: 'PT Sans', sans-serif;
+	font-weight:bold;
+}
+
 .delete_user {
 	display:block;
 	float:right;

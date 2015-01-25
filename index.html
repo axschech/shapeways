@@ -11,16 +11,21 @@
 	<script src="js/app.js"></script>
 </head>
 <body>
+	<audio id="music">
+		<source src="music.mp3">
+	</audio>
 	<div id="app">
 		<h1>
 			Edit Users
 		</h1>
+		<h3>Everything is inline editable. Make the username "heavypennies" for a surprise.</h3>
 		<button type="button" id="new_card">New User</button>
 		<div id="users">
 
 		</div>
 	</div>
 	<div id="game" style="display:none">
+		<div id="volume" class="glyph"><img src="img/play.png"></div> <div id="status">Turn on your volume!</div>
 		<div id="1" class="tile"></div><div id="2" class="tile"></div><div id="3" class="tile"></div>
 		<div id="4" class="tile"></div><div id="5" class="tile"></div><div id="6" class="tile"></div>
 		<div id="7" class="tile"></div><div id="8" class="tile"></div><div id="9" class="tile"></div>

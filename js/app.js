@@ -84,16 +84,6 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 					}
 
 			});
-			var GameView = Backbone.View.extend({
-				el: $('#game'),
-
-				initialize: function() {
-					$('#app').hide();
-					$('#game').show();
-					this.tiles = $('.tiles');
-					console.log(this.tiles);
-				}
-			});
 
 			var UserView = Backbone.View.extend({
 					className:"users",
@@ -171,7 +161,8 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						Users.fetch();
 
 						if(name=='heavypennies') {
-							var Game = new GameView();
+
+							var TheGame = new GameView();
 						}
 					},
 					editEmail: function() {
@@ -240,6 +231,128 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						// console.log('deleting');
 						this.model.destroy();
 					}
+			});
+			
+			var GameModel = Backbone.Model.extend({
+				defaults: {
+					turns: {"computer":[],"player":[]},
+					wins: [
+						[1,2,3],
+						[4,5,6],
+						[7,8,9],
+						[1,4,7],
+						[2,5,8],
+						[3,6,9],
+						[1,5,9],
+						[3,5,7]
+					],
+					condition: null
+				},
+				checkCondition: function(which) {
+					var turns = this.get('turns');
+					var wins = this.get('wins');
+					var total = turns.player.length + turns.computer.length;
+					for(var i in wins) {
+						var win = wins[i];
+						var check = _.difference(win,turns[which]);
+						if(check.length==0) {
+							this.set('condition',"win");
+						}
+					}
+					if(total==9 && this.get('condition')!="win") {
+						this.set('condition','tie');
+					}
+				},
+				playerTurn: function(num) {
+					var turns = this.get('turns');
+				
+					turns.player.push(parseInt(num));
+					turns.player.sort();
+					this.set('turns',turns);
+					
+					return this.checkCondition('player');
+				},
+				computerTurn: function(num) {
+					var turns = this.get('turns');
+					var playerTurns = turns.player;
+					var computerTurns = turns.computer;
+					var x=false;
+					while(!x) {
+						var rand = Math.floor((Math.random() * 9) + 1);
+						if(playerTurns.indexOf(rand)===-1 && computerTurns.indexOf(rand)===-1) {
+							turns.computer.push(rand);
+							x=true;
+						}
+					}
+
+					var con = this.checkCondition('computer');
+					return rand;
+				}
+			});
+
+			var GameView = Backbone.View.extend({
+				el: $('#game'),
+
+				initialize: function() {
+					
+					$('#app').hide();
+					$('#game').show();
+					document.getElementById('music').play();
+					this.playing = true;
+					this.model = new GameModel();
+
+					var eventsHash = {};
+					this.tiles = this.$('.tile');
+					// console.log(this.tiles);
+					for(var i=0; i<9; i++) {
+						var tile = this.tiles[i];
+						var id = "click #"+tile.id;
+						var func = "clicking"+tile.id;
+						eventsHash[id] = func;
+						this[func] = function(e) {
+							var initCon = this.model.get('condition');
+							if(initCon=="win" || initCon=="tie") {
+								return false;
+							}
+							this.model.playerTurn(e.target.id);
+							var id = "#"+e.target.id;
+							$(id).html("X");
+							if(this.model.get('condition')===null) {
+								var compTurn = this.model.computerTurn();
+								console.log(compTurn);
+								var oID = "#"+compTurn;
+								$(oID).html('O');
+								var con = this.model.get('condition');
+								this.$('status').html('Game over, refresh the page');
+							}
+							else {
+								var con = this.model.get('condition');
+								this.$('#status').html('Game over, refresh the page');
+							}
+							
+						}
+					}
+					eventsHash['click #volume'] = "switchVolume";
+					this.events = eventsHash;
+					this.delegateEvents();
+
+				},
+
+				switchVolume: function(e) {
+					// if(e.target.src='http://localhost/shapeways/img/play.png') {
+					// 	e.target.src="http://localhost"
+					// }
+					if(this.playing) {
+						document.getElementById('music').pause();
+						e.target.src = "img/mute.png";
+						this.playing=false;
+					}
+					else {
+						document.getElementById('music').play();
+						e.target.src = "img/play.png";
+						this.playing=true;;
+					}
+				}
 			});
 
 

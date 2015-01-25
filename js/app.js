@@ -1,4 +1,11 @@
+/*
 
+	I used this to help me understand somethings:
+	http://backbonejs.org/docs/todos.html
+
+	If some of my code looks similar, its because the functionality is similar.
+
+*/
 require.config({
 	// waitSeconds: 0,
 	baseUrl:'js',
@@ -55,7 +62,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 					},
 
 					initialize: function() {
-
+						//start listening for changes to the Users collection
 						this.listenTo(Users, 'add', this.addOne);
 						this.render();
 
@@ -89,7 +96,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 					className:"users",
 
 					template: _.template($("#card").html()),
-
+					//I probably could have done this better, but I ran out of time!
 					events: {
 						'keypress .edit_name': 'changeName',
 						'dblclick .name': 'editName',
@@ -112,7 +119,9 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 
 					render: function() {
 						this.$el.html(this.template(this.model.toJSON()));
-						
+						//on render check if any of the fields need to be in edit mode
+						// this won't happen very often because of the defaults
+
 						 if(this.model.get('name')=="") {
 						 	this.$('.edit_name').show();
 						 	this.$('.name').hide();
@@ -201,6 +210,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						Users.fetch();
 					},
 					goTwitter: function() {
+						//not enough time to try and implement the twitter api
 						if(this.model.get('twitter')=="") return;
 
 						var url = "https://twitter.com/"+this.model.get('twitter');
@@ -210,6 +220,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						);
 					},
 					changePicture: function(evt) {
+						//yay html5 file api!
 						var self = this;
 						console.log(evt);
 						var files = evt.target.files;

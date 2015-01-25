@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Sans);
 
+//thanks sass examples!
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
@@ -82,6 +83,8 @@ input[type=text] {
 	margin:5px;
 }
 
+//this allows the inline image editing
+//It's also super sketchy because I'm kind of tricking the user into clicking a file input
 input[type=file] {
 	cursor:pointer;
 	opacity: 0;

@@ -31,7 +31,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 							name: "Username",
 							email: "Contact",
 							twitter: "@twitter-handle",
-							picture: ""
+							image: "http://community.invisionpower.com/uploads/profile/photo-259363.jpg"
 						}
 					}
 			});
@@ -171,6 +171,23 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 
 						this.$('.edit_email').hide();
 						this.$('.email').show();
+						Users.fetch();
+					},
+					editTwitter: function() {
+						this.$('.edit_twitter').show();
+						this.$('.twitter').hide();
+					},
+					changeTwitter: function(e) {
+						if (e.keyCode != 13) return;
+      					if (!this.$('.edit_twitter').val()) return;
+
+						var twitter = this.$('.edit_twitter').val();
+						
+						this.model.set('twitter', twitter);
+						this.model.save();
+
+						this.$('.edit_twitter').hide();
+						this.$('.twitter').show();
 						Users.fetch();
 					},
 					deleteUser: function() {

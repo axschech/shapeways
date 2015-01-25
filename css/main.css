@@ -23,7 +23,11 @@
   margin: 15px;
   float: left;
   display: block;
-  border: 1px solid black; }
+  border: 1px solid black;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px; }
 
 .name, .email, .follow, .twitter {
   display: block;

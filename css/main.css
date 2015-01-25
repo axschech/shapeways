@@ -66,4 +66,14 @@ input[type=text] {
 input[type=file] {
   cursor: pointer; }
 
+#game {
+  width: 100px; }
+
+.tile {
+  display: block;
+  float: left;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ccc; }
+
 /*# sourceMappingURL=main.css.map */

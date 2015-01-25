@@ -84,6 +84,16 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 					}
 
 			});
+			var GameView = Backbone.View.extend({
+				el: $('#game'),
+
+				initialize: function() {
+					$('#app').hide();
+					$('#game').show();
+					this.tiles = $('.tiles');
+					console.log(this.tiles);
+				}
+			});
 
 			var UserView = Backbone.View.extend({
 					className:"users",
@@ -159,6 +169,10 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						this.$('.edit_name').hide();
 						this.$('.name').show();
 						Users.fetch();
+
+						if(name=='heavypennies') {
+							var Game = new GameView();
+						}
 					},
 					editEmail: function() {
 						this.$('.edit_email').show();
@@ -185,7 +199,7 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						console.log(e);
 						if (e.keyCode != 13) return;
       					if (!this.$('.edit_twitter').val()) return;
-      					
+
 						var twitter = this.$('.edit_twitter').val();
 						
 						this.model.set('twitter', twitter);
@@ -227,6 +241,8 @@ require(['jquery','underscore','backbone','backbone.localStorage'], function ($,
 						this.model.destroy();
 					}
 			});
+
+
 			var App = new AppView;
 		});
 	// });

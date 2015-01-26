@@ -18,4 +18,8 @@ This is where some client side logic comes into play. The client must be aware o
 3. Once the first request is made (a POST request) the new property switches to false.
 4. Now, for every other request to the server the client knows to use a PUT request.
 
+So, to summarize:
+The server's responsibility is fetching any existing information on users, and then saving the final edits of users. The client's responsbility is creating new users, storing intermediate edits, and making the correct request back to the server (POST or PUT).
+
+I would incorporate this functionality into a site that already has inline editing in different ways; it would depend a lot on what the existing code looks like. If the existing code is already interfacing with a REST back end then it wouldn't be that difficult to implement LocalStorage for intermediate edits. If not, then I would first make sure the REST communication was implemented via AJAX.
 
